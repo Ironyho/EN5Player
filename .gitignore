@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/EN5Player/.vs/EN5Player/v15
+/EN5Player/bin/Debug
+/EN5Player/obj/Debug
