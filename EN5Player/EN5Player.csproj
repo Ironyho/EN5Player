@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" DefaultTargets="Version;Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -13,6 +13,8 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -103,4 +105,36 @@
     <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="packages\MSBuildTasks.1.5.0.235\build\MSBuildTasks.targets" Condition="Exists('packages\MSBuildTasks.1.5.0.235\build\MSBuildTasks.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\MSBuildTasks.1.5.0.235\build\MSBuildTasks.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MSBuildTasks.1.5.0.235\build\MSBuildTasks.targets'))" />
+  </Target>
+      <PropertyGroup>
+        <Major>1</Major>
+        <Minor>0</Minor>
+        <Build>0</Build>
+        <Revision>0</Revision>
+    </PropertyGroup>
+
+    <Target Name="Version">
+        <GitClient LocalPath="$(MSBuildProjectDirectory)" Command="rev-list" Arguments="--all --count">
+            <Output TaskParameter="ConsoleOutput" PropertyName="Revision" />
+        </GitClient>
+        <AssemblyInfo
+            CodeLanguage="CS"
+            OutputFile="Properties\AssemblyInfo.cs"
+            AssemblyTitle="EN5Player"
+            AssemblyDescription="EN5Player for EasiNote5"
+            AssemblyCompany=""
+            AssemblyProduct="EN5Player"
+            AssemblyCopyright="All Copyright (c) 2017 Iron."
+            ComVisible="false"
+            CLSCompliant="true"
+            AssemblyInformationalVersion="$(Major).$(Minor).$(Build).$(Revision)"
+            AssemblyVersion="$(Major).$(Minor).$(Build).$(Revision)"
+            AssemblyFileVersion="$(Major).$(Minor).$(Build).$(Revision)" />
+    </Target>
 </Project>
