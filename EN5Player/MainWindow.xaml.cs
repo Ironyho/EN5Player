@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace EN5Player
+﻿namespace EN5Player
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
