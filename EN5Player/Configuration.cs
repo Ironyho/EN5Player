@@ -1,7 +1,5 @@
 ﻿// ReSharper disable InconsistentNaming
 
-using System;
-
 namespace EN5Player
 {
     /// <summary>
@@ -10,32 +8,9 @@ namespace EN5Player
     internal static class Configuration
     {
         /// <summary>
-        /// EN5Player
-        /// </summary>
-        public static string PlayerName = "EN5Player";
-
-        /// <summary>
-        /// Description of EN5Player
-        /// </summary>
-        public static string PlayerDescription =
-            "EN5Player is designed to show *.enbx file directly without the installation of EasiNote."
-            + Environment.NewLine +
-            "More about EasiNote5: http://easinote.seewo.com.";
-
-        /// <summary>
-        /// Simple description of EN5Player.
-        /// </summary>
-        public static string PlayerSimpleDescription = "EN5Player for EasiNote5";
-
-        /// <summary>
-        /// Copyright of EN5Player
-        /// </summary>
-        public static string PlayerCopyright = "All Copyright (c) 2017 Iron.";
-
-        /// <summary>
         /// Password used to zip or extract.
         /// </summary>
-        public static string PlayerPassword = "iron.yehong";
+        public static string Password = "iron.yehong";
 
         /// <summary>
         /// App name of EasiNote5

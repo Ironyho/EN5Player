@@ -50,8 +50,8 @@ namespace EN5Player
             // 3. zip the Working Directory and the *.enbx file
             using (var zip = new ZipFile())
             {
-                zip.Comment = Configuration.PlayerDescription;
-                //zip.Password = Configuration.PlayerPassword;
+                //zip.Comment = AppInfo.Current.Description;
+                //zip.Password = Configuration.Password;
 
                 zip.AddFile(enbxFileName, "");
                 zip.AddDirectory(directory, version);
@@ -68,14 +68,14 @@ namespace EN5Player
                 }
 
                 // exe file info
-                options.ProductName = Configuration.PlayerName;
-                options.Description = Configuration.PlayerSimpleDescription;
-                options.Copyright = Configuration.PlayerCopyright;
-                options.ProductVersion = version; // player version
+                options.ProductName = AppInfo.Current.Name;
+                options.Description = AppInfo.Current.Description;
+                options.Copyright = AppInfo.Current.Copyright;
+                options.ProductVersion = AppInfo.Current.Version; // player version
                 options.FileVersion = new Version(version); // EasiNote5 verion
 
                 // extract
-                var extractDirectory = $"%APPDATA%\\{Configuration.PlayerName}";
+                var extractDirectory = $"%APPDATA%\\{AppInfo.Current.Name}";
                 options.DefaultExtractDirectory = extractDirectory;
                 options.PostExtractCommandLine = $"{extractDirectory}\\{version}\\{Configuration.EN5LauncherName}";
                 options.ExtractExistingFile = ExtractExistingFileAction.DoNotOverwrite;
