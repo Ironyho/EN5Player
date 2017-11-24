@@ -8,6 +8,11 @@ namespace EN5Player
     internal static class EN5Wrapper
     {
         /// <summary>
+        /// Subscribe this event to get wrapping progrocess.
+        /// </summary>
+        public static EventHandler<WrapProgressEventArgs> Progressing;
+
+        /// <summary>
         /// Wrap the specified *.enbx file together with the working directory of EasiNote5 into a single executable file.
         /// </summary>
         /// <param name="enbxFileName">The specified *.enbx file that to be wrapped.</param>
@@ -60,7 +65,8 @@ namespace EN5Player
             {
                 //zip.Comment = AppInfo.Current.Description;
                 //zip.Password = Configuration.Password;
-                
+                zip.SaveProgress += Zip_SaveProgress;
+
                 zip.AddFile(launcher, "");
                 zip.AddFile(enbxFileName, "");
                 zip.AddDirectory(directory, version);
@@ -91,6 +97,39 @@ namespace EN5Player
                 // zip
                 zip.SaveSelfExtractor(outputFileName, options);
             }
+        }
+
+        private static void Zip_SaveProgress(object sender, SaveProgressEventArgs e)
+        {
+            if (e.EventType == ZipProgressEventType.Saving_AfterWriteEntry)
+            {
+                OnProgress(e.EntriesSaved * 100 / e.EntriesTotal);
+            }
+        }
+
+        private static void OnProgress(int percent)
+        {
+            Progressing?.Invoke(null, new WrapProgressEventArgs(percent));
+        }
+    }
+
+    /// <summary>
+    /// Provide data for the <seealso cref="EN5Wrapper.Progressing"/> event.
+    /// </summary>
+    internal class WrapProgressEventArgs : EventArgs
+    {
+        /// <summary>
+        /// Get the percent of the wrapping progress.
+        /// </summary>
+        public int Percent { get; }
+
+        /// <summary>
+        /// WrapProgressEventArgs constructor
+        /// </summary>
+        /// <param name="percent"></param>
+        public WrapProgressEventArgs(int percent)
+        {
+            Percent = percent;
         }
     }
 }
