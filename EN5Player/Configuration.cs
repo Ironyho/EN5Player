@@ -48,8 +48,13 @@ namespace EN5Player
         public static string EN5FileIconName = "enb_file.ico";
 
         /// <summary>
-        /// The launcher of EasiNote
+        /// The entry of EasiNote.
         /// </summary>
-        public static string EN5LauncherName = "\\Main\\EasiNote.Cloud.exe";
+        public static string EN5Entry = "\\Main\\EasiNote.Cloud.exe";
+
+        /// <summary>
+        /// The launcher of the SFX file.
+        /// </summary>
+        public static string EN5LauncherName = "Launcher.bat";
     }
 }

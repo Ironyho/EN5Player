@@ -47,19 +47,28 @@ namespace EN5Player
                 fileIcon = Path.Combine(directoryInfo.Parent.FullName, Configuration.EN5FileIconName);
             }
 
+            // launcher
+            var extractDirectory = $"%APPDATA%\\{AppInfo.Current.Name}";
+
+            var entryFileNameInExtractDirectory = $"{extractDirectory}\\{version}\\{Configuration.EN5Entry}";
+            var enbxFileNameInExtractDirectory = $"{extractDirectory}\\{Path.GetFileName(enbxFileName)}";
+
+            var launcher = EN5Launcher.GenerateLauncher(entryFileNameInExtractDirectory, enbxFileNameInExtractDirectory);
+
             // 3. zip the Working Directory and the *.enbx file
             using (var zip = new ZipFile())
             {
                 //zip.Comment = AppInfo.Current.Description;
                 //zip.Password = Configuration.Password;
-
+                
+                zip.AddFile(launcher, "");
                 zip.AddFile(enbxFileName, "");
                 zip.AddDirectory(directory, version);
 
                 var options = new SelfExtractorSaveOptions
                 {
                     Flavor = SelfExtractorFlavor.ConsoleApplication,
-                    RemoveUnpackedFilesAfterExecute = true
+                    //RemoveUnpackedFilesAfterExecute = true
                 };
 
                 if (!string.IsNullOrEmpty(fileIcon) && File.Exists(fileIcon))
@@ -75,9 +84,8 @@ namespace EN5Player
                 options.FileVersion = new Version(version); // EasiNote5 verion
 
                 // extract
-                var extractDirectory = $"%APPDATA%\\{AppInfo.Current.Name}";
                 options.DefaultExtractDirectory = extractDirectory;
-                options.PostExtractCommandLine = $"{extractDirectory}\\{version}\\{Configuration.EN5LauncherName}";
+                options.PostExtractCommandLine = launcher;
                 options.ExtractExistingFile = ExtractExistingFileAction.DoNotOverwrite;
 
                 // zip
