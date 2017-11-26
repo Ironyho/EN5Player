@@ -110,6 +110,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="save.ico" />
+    <Resource Include="open.ico" />
+    <Resource Include="feedback.ico" />
+    <Resource Include="help.ico" />
+    <Resource Include="about.ico" />
+    <Resource Include="exit.ico" />
+    <Resource Include="enb_file.ico" />
     <Content Include="icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

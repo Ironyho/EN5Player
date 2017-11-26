@@ -3,8 +3,85 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" Title="EN5Player" Height="350" Width="525">
-    <Grid>
-
+        mc:Ignorable="d" Title="EN5Player" Height="350" Width="525"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="DarkGray"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Menu Margin="0 0 0 10">
+            <MenuItem Header="File">
+                <MenuItem Header="Select *.enbx file ...">
+                    <MenuItem.Icon>
+                        <Image Source="open.ico" Width="14"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Generate *.exe file ...">
+                    <MenuItem.Icon>
+                        <Image Source="save.ico" Width="13"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="Exit">
+                    <MenuItem.Icon>
+                        <Image Source="exit.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="Instruction ...">
+                    <MenuItem.Icon>
+                        <Image Source="help.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Feed back ...">
+                    <MenuItem.Icon>
+                        <Image Source="feedback.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="About ...">
+                    <MenuItem.Icon>
+                        <Image Source="about.ico"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <Border x:Name="FilePanel" Grid.Row="1"
+                DragEnter="FilePanel_OnDragEnter" DragLeave="FilePanel_OnDragLeave" Drop="FilePanel_OnDrop"
+                BorderBrush="LightGray" BorderThickness="1" AllowDrop="True" Background="#EEEEEE">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Image Source="enb_file.ico" Width="100" Height="100" Opacity="0.3" RenderTransformOrigin="0.5 0.5">
+                    <Image.RenderTransform>
+                        <ScaleTransform x:Name="ImageTransform" />
+                    </Image.RenderTransform>
+                </Image>
+                <StackPanel Grid.Row="1" Margin="0 0 0 10">
+                    <TextBlock Text="将EasiNote5文件（*.enbx）拖放到此处"/>
+                    <TextBlock Text="Drag and drop an EasiNote5 file (*.enbx) here" FontStyle="Italic"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <StackPanel Grid.Row="2" Orientation="Vertical">
+            <UniformGrid Margin="0 10" Columns="2" VerticalAlignment="Center">
+                <Button Content="选择 *.enbx 文件"/>
+                <Button Content="生成 *.exe 文件"/>
+            </UniformGrid>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="状态："/>
+                <TextBlock Text="请拖放或选择 *.enbx 文件"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>
