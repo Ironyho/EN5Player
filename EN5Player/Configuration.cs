@@ -45,7 +45,7 @@ namespace EN5Player
         /// <summary>
         /// File name of EasiNote5 file icon.
         /// </summary>
-        public static string EN5FileIconName = "enb_file.ico";
+        public static string EN5FileIconName = "file_icon.ico";
 
         /// <summary>
         /// The entry of EasiNote.

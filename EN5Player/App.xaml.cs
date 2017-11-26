@@ -15,12 +15,12 @@ namespace EN5Player
 
 #if DEBUG // just for test
 
-            if (Environment.MachineName == "IRON-PC")
+            if (Environment.MachineName == "IRON-PC" || Environment.MachineName == "SURFACE-YEHONG")
             {
-                const string directory = @"C:\Users\Iron\Desktop";
+                var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
-                var enbxFileName = $@"{directory}\1234.enbx";
-                var outputFileName = $@"{directory}\Test.exe";
+                var enbxFileName = $@"{desktop}\1234.enbx";
+                var outputFileName = $@"{desktop}\enbx1.exe";
 
                 if (File.Exists(enbxFileName))
                 {

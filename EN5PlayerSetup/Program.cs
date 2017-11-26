@@ -54,7 +54,7 @@ namespace EN5PlayerSetup
                 var appInfo = new AppInfo(typeof(AppInfo).Assembly);
                 var launcherName = $"{appInfo.Name}.exe";
 
-                //options.IconFile = ???;
+                options.IconFile = $"{baseDirectory}\\icon.ico";
                 options.ProductName = appInfo.Name;
                 options.Description = appInfo.Description;
                 options.Copyright = appInfo.Copyright;

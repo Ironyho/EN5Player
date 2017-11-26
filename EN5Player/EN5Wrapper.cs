@@ -43,15 +43,6 @@ namespace EN5Player
                 throw new NotInstalledException(Configuration.EN5AppName);
             }
 
-            // file icon
-            var fileIcon = string.Empty;
-            var directoryInfo = new DirectoryInfo(directory);
-
-            if (directoryInfo.Parent != null)
-            {
-                fileIcon = Path.Combine(directoryInfo.Parent.FullName, Configuration.EN5FileIconName);
-            }
-
             // launcher
             var extractDirectory = $"%APPDATA%\\{AppInfo.Current.Name}";
 
@@ -77,6 +68,7 @@ namespace EN5Player
                     //RemoveUnpackedFilesAfterExecute = true
                 };
 
+                var fileIcon = $"{AppDomain.CurrentDomain.BaseDirectory}\\{Configuration.EN5FileIconName}";
                 if (!string.IsNullOrEmpty(fileIcon) && File.Exists(fileIcon))
                 {
                     options.IconFile = fileIcon;
