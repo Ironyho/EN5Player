@@ -13,7 +13,8 @@ namespace EN5Player
         {
             base.OnStartup(e);
 
-            // just for test
+#if DEBUG // just for test
+
             if (Environment.MachineName == "IRON-PC")
             {
                 const string directory = @"C:\Users\Iron\Desktop";
@@ -26,6 +27,8 @@ namespace EN5Player
                     EN5Wrapper.WrapToExe(enbxFileName, outputFileName);
                 }
             }
+
+#endif
         }
     }
 }

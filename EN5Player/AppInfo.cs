@@ -7,7 +7,7 @@ namespace EN5Player
     /// <summary>
     /// Informaton of current application
     /// </summary>
-    internal class AppInfo
+    public class AppInfo
     {
         /// <summary>
         /// Get the <seealso cref="AppInfo"/> of current executing assembly.
@@ -31,6 +31,11 @@ namespace EN5Player
             _assembly = assembly;
             _assemblyName = assembly.GetName();
         }
+
+        /// <summary>
+        /// Get the full name of the application.
+        /// </summary>
+        public string FileName => _assembly.Location;
 
         /// <summary>
         /// Get the name of current application.
