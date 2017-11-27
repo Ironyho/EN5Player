@@ -3,13 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EN5Player"
         mc:Ignorable="d" Title="EN5Player" Height="350" Width="525"
-        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        DataContext="{x:Static local:MainWindowViewModel.Instance}">
     <Window.Resources>
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="Foreground" Value="DarkGray"/>
         </Style>
+        <local:StringToVisibleConverter x:Key="String2Visibility"/>
+        <local:StringToInvisibleConverter x:Key="String2Invisibility"/>
     </Window.Resources>
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -19,18 +23,18 @@
         </Grid.RowDefinitions>
         <Menu Margin="0 0 0 10">
             <MenuItem Header="File">
-                <MenuItem Header="Select *.enbx file ...">
+                <MenuItem Header="Select *.enbx file ..." Command="{Binding SelectEnbxFileCommand}">
                     <MenuItem.Icon>
                         <Image Source="open.ico" Width="14"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Generate *.exe file ...">
+                <MenuItem Header="Generate *.exe file ..." Command="{Binding SaveToExeFileCommand}">
                     <MenuItem.Icon>
                         <Image Source="save.ico" Width="13"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator></Separator>
-                <MenuItem Header="Exit">
+                <MenuItem Header="Exit" Command="{Binding ExitCommand}">
                     <MenuItem.Icon>
                         <Image Source="exit.ico"/>
                     </MenuItem.Icon>
@@ -67,20 +71,30 @@
                         <ScaleTransform x:Name="ImageTransform" />
                     </Image.RenderTransform>
                 </Image>
-                <StackPanel Grid.Row="1" Margin="0 0 0 10">
-                    <TextBlock Text="将EasiNote5文件（*.enbx）拖放到此处"/>
-                    <TextBlock Text="Drag and drop an EasiNote5 file (*.enbx) here" FontStyle="Italic"/>
-                </StackPanel>
+                <Grid Grid.Row="1" Margin="0 0 0 10">
+                    <StackPanel>
+                        <StackPanel.Visibility>
+                            <Binding Path="EnbxFileName" Converter="{StaticResource String2Invisibility}"/>
+                        </StackPanel.Visibility>
+                        <TextBlock Text="将EasiNote5文件（*.enbx）拖放到此处"/>
+                        <TextBlock Text="Drag and drop an EasiNote5 file (*.enbx) here" FontStyle="Italic"/>
+                    </StackPanel>
+                    <TextBlock Text="{Binding EnbxFileName}" VerticalAlignment="Center">
+                        <TextBlock.Visibility>
+                            <Binding Path="EnbxFileName" Converter="{StaticResource String2Visibility}"/>
+                        </TextBlock.Visibility>
+                    </TextBlock>
+                </Grid>
             </Grid>
         </Border>
         <StackPanel Grid.Row="2" Orientation="Vertical">
             <UniformGrid Margin="0 10" Columns="2" VerticalAlignment="Center">
-                <Button Content="选择 *.enbx 文件"/>
-                <Button Content="生成 *.exe 文件"/>
+                <Button Content="选择 *.enbx 文件" Command="{Binding SelectEnbxFileCommand}"/>
+                <Button Content="生成 *.exe 文件" Command="{Binding SaveToExeFileCommand}"/>
             </UniformGrid>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="状态："/>
-                <TextBlock Text="请拖放或选择 *.enbx 文件"/>
+                <TextBlock Text="当前状态："/>
+                <TextBlock x:Name="StateText" Text="请拖放或选择 *.enbx 文件"/>
             </StackPanel>
         </StackPanel>
     </Grid>
