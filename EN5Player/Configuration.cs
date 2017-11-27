@@ -56,5 +56,10 @@ namespace EN5Player
         /// The launcher of the SFX file.
         /// </summary>
         public static string EN5LauncherName = "Launcher.bat";
+
+        /// <summary>
+        /// The installer of DotNetFramework
+        /// </summary>
+        public static string DotNetInstaller = "\\Main\\SupportFiles\\dotnetfx45_full_x86_x64.exe";
     }
 }

@@ -46,6 +46,11 @@ namespace EN5Player
             builder.AppendLine("@echo off");
             builder.Append(Environment.NewLine);
 
+            builder.AppendLine("echo Check and Install .NETFramework...");
+            builder.AppendLine("echo Installer: %2");
+            builder.AppendLine(CheckAndInstallDotNet());
+            builder.Append(Environment.NewLine);
+
             builder.AppendLine("echo Launch EasiNote5...");
             builder.AppendLine($"echo Entry: {entryFileName}");
             builder.AppendLine($"echo FileName: %1");
@@ -55,6 +60,27 @@ namespace EN5Player
 
             builder.AppendLine("echo exit");
             builder.AppendLine("exit");
+
+            return builder.ToString();
+        }
+
+        private static string CheckAndInstallDotNet()
+        {
+            var builder = new StringBuilder();
+
+            builder.AppendLine("reg query \"" +
+                               @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\.NETFramework\v4.0.30319\SKUs\.NETFramework,Version=v4.5.2" +
+                               "\" 2>nul");
+            builder.AppendLine("if errorlevel 1 (");
+            builder.AppendLine("    if exist %2 (");
+            builder.AppendLine("        call %2 /q /norestart");
+            builder.AppendLine("    ) else (");
+            builder.AppendLine("        echo Installer does not exist");
+            builder.AppendLine("        pause");
+            builder.AppendLine("    )");
+            builder.AppendLine(") else (");
+            builder.AppendLine("    echo .NETFramework v4.5.2 has installed");
+            builder.AppendLine($")");
 
             return builder.ToString();
         }

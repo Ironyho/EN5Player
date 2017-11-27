@@ -51,6 +51,7 @@ namespace EN5Player
             var enbxFileNameInExtractDirectory = $"{extractDirectory}\\{Path.GetFileName(enbxFileName)}";
 
             var launcher = EN5Launcher.GenerateLauncher(entryFileNameInExtractDirectory);
+            var dotNetInstaller = $"{extractDirectory}\\{version}\\{Configuration.DotNetInstaller}";
 
             // 3. zip the Working Directory and the *.enbx file
             using (var zip = new ZipFile())
@@ -87,7 +88,7 @@ namespace EN5Player
 
                 // extract
                 options.DefaultExtractDirectory = extractDirectory;
-                options.PostExtractCommandLine = $"{launcher} \"{enbxFileNameInExtractDirectory}\"";
+                options.PostExtractCommandLine = $"{launcher} \"{enbxFileNameInExtractDirectory}\" \"{dotNetInstaller}\"";
                 options.ExtractExistingFile = ExtractExistingFileAction.DoNotOverwrite;
 
                 // zip
