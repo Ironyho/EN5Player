@@ -63,7 +63,7 @@ namespace EN5Player
                 zip.AlternateEncoding = Encoding.UTF8;
                 zip.AlternateEncodingUsage = ZipOption.AsNecessary;
 
-                zip.AddFile(launcher, "");
+                zip.AddFile(launcher, $"{AppInfo.Current.Version}");
                 zip.AddFile(enbxFileName, "");
                 zip.AddDirectory(directory, version);
 
@@ -87,8 +87,11 @@ namespace EN5Player
                 options.FileVersion = new Version(version); // EasiNote5 verion
 
                 // extract
+                var launcherInExtract = $"{extractDirectory}\\{AppInfo.Current.Version}\\{Path.GetFileName(launcher)}";
+                var parameters = $"\"{enbxFileNameInExtractDirectory}\" \"{dotNetInstaller}\"";
+
                 options.DefaultExtractDirectory = extractDirectory;
-                options.PostExtractCommandLine = $"{launcher} \"{enbxFileNameInExtractDirectory}\" \"{dotNetInstaller}\"";
+                options.PostExtractCommandLine = $"{launcherInExtract} {parameters}";
                 options.ExtractExistingFile = ExtractExistingFileAction.DoNotOverwrite;
 
                 // zip
