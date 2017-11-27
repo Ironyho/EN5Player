@@ -15,7 +15,7 @@ namespace EN5Player
         /// Generate a launcher that can start the EasiNote5 wiht a *.enbx file.
         /// </summary>
         /// <returns>The filename of the launcher.</returns>
-        public static string GenerateLauncher(string en5EntryFileName, string enbxFileName)
+        public static string GenerateLauncher(string en5EntryFileName)
         {
             // ensure directory
             var appdataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -28,7 +28,7 @@ namespace EN5Player
 
             // write the launcher to file
             var fileName = Path.Combine(playerDirectory, Configuration.EN5LauncherName);
-            var content = GetLauncherContent(en5EntryFileName, enbxFileName);
+            var content = GetLauncherContent(en5EntryFileName);
 
             if (File.Exists(fileName))
             {
@@ -39,7 +39,7 @@ namespace EN5Player
             return fileName;
         }
 
-        private static string GetLauncherContent(string entryFileName, string fileName)
+        private static string GetLauncherContent(string entryFileName)
         {
             var builder = new StringBuilder();
 
@@ -48,9 +48,9 @@ namespace EN5Player
 
             builder.AppendLine("echo Launch EasiNote5...");
             builder.AppendLine($"echo Entry: {entryFileName}");
-            builder.AppendLine($"echo FileName: {fileName}");
+            builder.AppendLine($"echo FileName: %1");
 
-            builder.AppendLine($"start {entryFileName} {fileName} -m Display");
+            builder.AppendLine($"start {entryFileName} %1 -m Display");
             builder.Append(Environment.NewLine);
 
             builder.AppendLine("echo exit");

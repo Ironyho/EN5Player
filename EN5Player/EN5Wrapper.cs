@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using Ionic.Zip;
 
 namespace EN5Player
@@ -49,7 +50,7 @@ namespace EN5Player
             var entryFileNameInExtractDirectory = $"{extractDirectory}\\{version}\\{Configuration.EN5Entry}";
             var enbxFileNameInExtractDirectory = $"{extractDirectory}\\{Path.GetFileName(enbxFileName)}";
 
-            var launcher = EN5Launcher.GenerateLauncher(entryFileNameInExtractDirectory, enbxFileNameInExtractDirectory);
+            var launcher = EN5Launcher.GenerateLauncher(entryFileNameInExtractDirectory);
 
             // 3. zip the Working Directory and the *.enbx file
             using (var zip = new ZipFile())
@@ -57,6 +58,9 @@ namespace EN5Player
                 //zip.Comment = AppInfo.Current.Description;
                 //zip.Password = Configuration.Password;
                 zip.SaveProgress += Zip_SaveProgress;
+
+                zip.AlternateEncoding = Encoding.UTF8;
+                zip.AlternateEncodingUsage = ZipOption.AsNecessary;
 
                 zip.AddFile(launcher, "");
                 zip.AddFile(enbxFileName, "");
@@ -83,7 +87,7 @@ namespace EN5Player
 
                 // extract
                 options.DefaultExtractDirectory = extractDirectory;
-                options.PostExtractCommandLine = launcher;
+                options.PostExtractCommandLine = $"{launcher} \"{enbxFileNameInExtractDirectory}\"";
                 options.ExtractExistingFile = ExtractExistingFileAction.DoNotOverwrite;
 
                 // zip
