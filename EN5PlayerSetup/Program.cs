@@ -67,7 +67,13 @@ namespace EN5PlayerSetup
                 options.ExtractExistingFile = ExtractExistingFileAction.OverwriteSilently;
 
                 // zip
-                zip.SaveSelfExtractor($"{baseDirectory}\\Package\\{launcherName}", options);
+                var package = $"{baseDirectory}\\Package";
+                if (!Directory.Exists(package))
+                {
+                    Directory.CreateDirectory(package);
+                }
+
+                zip.SaveSelfExtractor($"{package}\\{launcherName}", options);
             }
         }
     }
