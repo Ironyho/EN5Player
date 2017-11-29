@@ -30,7 +30,7 @@ namespace EN5PlayerSetup
                     continue;
                 }
 
-                if (file.EndsWith(".exe") || file.EndsWith(".dll"))
+                if (file.EndsWith(".exe") || file.EndsWith(".dll") || file.EndsWith(".ico"))
                 {
                     filesToPackage.Add(file);
                 }

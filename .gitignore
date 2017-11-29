@@ -5,11 +5,13 @@
 /EN5Player/.vs/EN5Player/v15
 /EN5Player/bin/Debug
 /EN5Player/obj/Debug
-/EN5Player/packages/DotNetZip.1.10.1
-packages
 /EN5Player/Properties/AssemblyInfo.cs
 /EN5PlayerSetup/bin/Debug
 /EN5PlayerSetup/obj/Debug
 /EN5PlayerSetup/EN5PlayerSetup.csproj.user
-/EN5PlayerSetup/EN5PlayerSetup.csproj.user
 /EN5Player/EN5Player.csproj.user
+/EN5PlayerSetup/obj/Release
+/EN5PlayerSetup/bin/Release
+/EN5Player/obj/Release
+/EN5Player/bin/Release
+/EN5Player/packages
