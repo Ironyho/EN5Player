@@ -41,17 +41,17 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Help">
-                <MenuItem Header="Instruction ...">
+                <MenuItem Header="Instruction ..." IsEnabled="False">
                     <MenuItem.Icon>
                         <Image Source="help.ico"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Feed back ...">
+                <MenuItem Header="Feedback ..." IsEnabled="False">
                     <MenuItem.Icon>
                         <Image Source="feedback.ico"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="About ...">
+                <MenuItem Header="About ..." IsEnabled="False">
                     <MenuItem.Icon>
                         <Image Source="about.ico"/>
                     </MenuItem.Icon>

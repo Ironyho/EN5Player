@@ -86,7 +86,18 @@ namespace EN5Player
         {
             Task.Run(() =>
             {
-                EN5Wrapper.WrapToExe(EnbxFileName, outputFileName);
+                try
+                {
+                    EN5Wrapper.WrapToExe(EnbxFileName, outputFileName);
+                }
+                catch (NotInstalledException)
+                {
+                    OnStateUpdated(State.En5NotInstall);
+                }
+                catch (Exception)
+                {
+                    OnStateUpdated(State.Exception);
+                }
             });
         }
 
@@ -161,11 +172,15 @@ namespace EN5Player
 
     public enum State
     {
-        [Description("请拖放或选择 *.enbx 文件")] DragEnbxFile,
+        [Description("需要安装 EasiNote5 才能使用此工具")] En5NotInstall,
 
         [Description("文件格式不正确，只能处理 enbx 格式的文件")] EnbxExpected,
-
+        
         [Description("文件不存在")] FileNotFound,
+
+        [Description("发生未知异常")] Exception,
+
+        [Description("请拖放或选择 *.enbx 文件")] DragEnbxFile,
 
         [Description("已选择文件")] FileSelected,
 

@@ -71,7 +71,7 @@ namespace EN5Player
 
         private void UpdateState(State state, string detail = "")
         {
-            var isWarn = state == State.EnbxExpected || state == State.FileNotFound;
+            var isWarn = state <= State.Exception;
             if (string.IsNullOrEmpty(detail) && state == State.FileSelected)
             {
                 detail = MainWindowViewModel.Instance.EnbxFileName;
@@ -80,8 +80,11 @@ namespace EN5Player
             var message = GetEnumDescription(state);
             var text = string.IsNullOrEmpty(detail) ? message : $"{message} - {detail}";
 
-            StateText.Text = text;
-            StateText.Foreground = isWarn ? Brushes.OrangeRed : Brushes.DarkGray;
+            Dispatcher.Invoke(() =>
+            {
+                StateText.Text = text;
+                StateText.Foreground = isWarn ? Brushes.OrangeRed : Brushes.DarkGray;
+            });
         }
 
         private static void SetEnbxFileNameFromDragDrop(IDataObject data)
