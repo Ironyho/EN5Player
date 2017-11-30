@@ -10,7 +10,7 @@ namespace EN5Player
         /// <summary>
         /// Password used to zip or extract.
         /// </summary>
-        public static string Password = "iron.yehong";
+        public static string Password = "MGL6RGtnks0EYLxw1n/IYefsP2kRcmx1";
 
         /// <summary>
         /// The website where instructions are.

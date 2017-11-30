@@ -57,7 +57,7 @@ namespace EN5Player
             using (var zip = new ZipFile())
             {
                 //zip.Comment = AppInfo.Current.Description;
-                //zip.Password = Configuration.Password;
+                zip.Password = EncryptHelper.Decrypt(Configuration.Password);
                 zip.SaveProgress += Zip_SaveProgress;
 
                 zip.AlternateEncoding = Encoding.UTF8;

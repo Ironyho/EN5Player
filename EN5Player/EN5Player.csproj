@@ -69,6 +69,7 @@
     <Compile Include="AppInfo.cs" />
     <Compile Include="EN5Launcher.cs" />
     <Compile Include="EN5Wrapper.cs" />
+    <Compile Include="EncryptHelper.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Properties\Annotations.cs" />

@@ -44,6 +44,7 @@ namespace EN5PlayerSetup
                     zip.AddFile(file, "");
                 }
 
+                zip.Password = "iron.yehong";
                 var options = new SelfExtractorSaveOptions
                 {
                     Flavor = SelfExtractorFlavor.ConsoleApplication,
