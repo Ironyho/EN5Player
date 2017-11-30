@@ -39,12 +39,12 @@ namespace EN5PlayerSetup
             // package them together into a single executable file
             using (var zip = new ZipFile())
             {
+                zip.Password = "iron.yehong";
                 foreach (var file in filesToPackage)
                 {
                     zip.AddFile(file, "");
                 }
 
-                zip.Password = "iron.yehong";
                 var options = new SelfExtractorSaveOptions
                 {
                     Flavor = SelfExtractorFlavor.ConsoleApplication,
