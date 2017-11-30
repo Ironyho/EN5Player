@@ -63,6 +63,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AboutDilog.xaml.cs">
+      <DependentUpon>AboutDilog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AppInfo.cs" />
     <Compile Include="EN5Launcher.cs" />
     <Compile Include="EN5Wrapper.cs" />
@@ -71,6 +74,10 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="RegistryHelper.cs" />
     <Compile Include="RelayCommand.cs" />
+    <Page Include="AboutDilog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -148,6 +155,6 @@
     <GitClient LocalPath="$(MSBuildProjectDirectory)" Command="rev-list" Arguments="--all --count">
       <Output TaskParameter="ConsoleOutput" PropertyName="Revision" />
     </GitClient>
-    <AssemblyInfo CodeLanguage="CS" OutputFile="Properties\AssemblyInfo.cs" AssemblyTitle="EN5Player" AssemblyDescription="Player for the file of EasiNote5" AssemblyCompany="" AssemblyProduct="EN5Player" AssemblyCopyright="All Copyright (c) 2017 Iron." ComVisible="false" CLSCompliant="true" AssemblyInformationalVersion="$(Major).$(Minor).$(Build).$(Revision)" AssemblyVersion="$(Major).$(Minor).$(Build).$(Revision)" AssemblyFileVersion="$(Major).$(Minor).$(Build).$(Revision)" />
+    <AssemblyInfo CodeLanguage="CS" OutputFile="Properties\AssemblyInfo.cs" AssemblyTitle="EN5Player" AssemblyDescription="Player for the file of EasiNote5" AssemblyCompany="" AssemblyProduct="EN5Player" AssemblyCopyright="All Copyright (c) 2017 Iron" ComVisible="false" CLSCompliant="true" AssemblyInformationalVersion="$(Major).$(Minor).$(Build).$(Revision)" AssemblyVersion="$(Major).$(Minor).$(Build).$(Revision)" AssemblyFileVersion="$(Major).$(Minor).$(Build).$(Revision)" />
   </Target>
 </Project>

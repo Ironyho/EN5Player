@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -23,6 +24,12 @@ namespace EN5Player
 
         public ICommand ExitCommand { get; }
 
+        public ICommand FeedbackCommand { get; }
+
+        public ICommand HelpCommand { get; }
+
+        public ICommand AboutCommand { get; }
+
         public Action<State> StateUpdated;
 
         /// <summary>
@@ -37,6 +44,10 @@ namespace EN5Player
             SelectEnbxFileCommand = new RelayCommand(o => SelectEnbxFile(), o => !_isWrapping);
             SaveToExeFileCommand = new RelayCommand(o => SaveToExeFile(), o => HasEnbxFile() && !_isWrapping);
             ExitCommand = new RelayCommand(o => Application.Current.Shutdown(0), o => !_isWrapping);
+
+            HelpCommand = new RelayCommand(o => Help(), o => true);
+            FeedbackCommand = new RelayCommand(o => Feedback(), o => true);
+            AboutCommand = new RelayCommand(o => About(), o => true);
 
             EN5Wrapper.Progressing += (s, e) =>
             {
@@ -159,6 +170,21 @@ namespace EN5Player
                     OnStateUpdated(State.EnbxExpected);
                 }
             }
+        }
+
+        private void Help()
+        {
+            Process.Start(Configuration.HelpUrl);
+        }
+
+        private void Feedback()
+        {
+            Process.Start(Configuration.HelpUrl);
+        }
+
+        private void About()
+        {
+            new AboutDilog() {Owner = Application.Current.MainWindow}.ShowDialog();
         }
 
         private void OnStateUpdated(State state)
