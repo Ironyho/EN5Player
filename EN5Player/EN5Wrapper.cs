@@ -46,8 +46,11 @@ namespace EN5Player
 
             // launcher
             var extractDirectory = $"%APPDATA%\\{AppInfo.Current.Name}";
+            var entry = File.Exists(Path.Combine(directory, Configuration.EN5Entry))
+                ? Configuration.EN5Entry
+                : Configuration.EN5Entry_New;
 
-            var entryFileNameInExtractDirectory = $"{extractDirectory}\\{version}\\{Configuration.EN5Entry}";
+            var entryFileNameInExtractDirectory = $"{extractDirectory}\\{version}\\{entry}";
             var enbxFileNameInExtractDirectory = $"{extractDirectory}\\{Path.GetFileName(enbxFileName)}";
 
             var launcher = EN5Launcher.GenerateLauncher(entryFileNameInExtractDirectory);

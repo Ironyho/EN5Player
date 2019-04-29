@@ -53,6 +53,11 @@ namespace EN5Player
         public static string EN5Entry = "\\Main\\EasiNote.Cloud.exe";
 
         /// <summary>
+        /// The new entry of EasiNote.
+        /// </summary>
+        public static string EN5Entry_New = "\\Main\\EasiNote.exe";
+
+        /// <summary>
         /// The launcher of the SFX file.
         /// </summary>
         public static string EN5LauncherName = "Launcher.bat";
